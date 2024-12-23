@@ -37,6 +37,7 @@ const Footer = () => {
     { text: 'Real Estate Agents in Ahmedabad', href: '/' },
     { text: 'Real Estate Agents in Ahmedabad', href: '/' },
   ]
+  
 
   const bestBudgetBracketsLinks = [
     { text: 'Properties under 50 lakhs', href: '/' },
