@@ -4,7 +4,9 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 
+// Import Swiper styles
 import 'swiper/css'
+import 'swiper/css/autoplay'
 
 export default function ImageSlider() {
     return (
@@ -27,7 +29,7 @@ export default function ImageSlider() {
                     <SwiperSlide key={index}>
                         <img
                             src={`/assets/about-liveinluxury${(index % 3) + 1}.jpg`}
-                            alt="about-liveinluxury"
+                            alt={`Luxury lifestyle image ${(index % 3) + 1}`}
                             className="w-full h-[626px] rounded-2xl object-cover"
                         />
                     </SwiperSlide>
@@ -36,3 +38,4 @@ export default function ImageSlider() {
         </div>
     )
 }
+
