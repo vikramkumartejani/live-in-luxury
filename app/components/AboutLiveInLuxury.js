@@ -1,5 +1,5 @@
 import React from 'react'
-import ImageSlider from './ImageSlider'
+// import ImageSlider from './ImageSlider'
 
 const AboutLiveInLuxury = () => {
   return (
@@ -30,7 +30,7 @@ const AboutLiveInLuxury = () => {
         </div>
 
       </div>
-      <ImageSlider />
+      {/* <ImageSlider /> */}
     </>
   )
 }
