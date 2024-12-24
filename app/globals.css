@@ -1,20 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   font-family: "Sora", serif;
 }
-
-
 
 @layer components {
   .marquee {
@@ -35,3 +33,11 @@ body{
   }
 }
 
+.swiper-slide-custom {
+  transition: all 0.3s ease;
+  transform: scale(0.8) !important;
+}
+
+.swiper-slide-active {
+  transform: scale(1) !important;
+}

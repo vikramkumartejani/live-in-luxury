@@ -6,17 +6,19 @@ import AboutUs from "./components/AboutUs";
 import ExploreNow from "./components/ExploreNow";
 import DiscoverYourDreamHome from "./components/DiscoverYourDreamHome";
 import AboutLiveInLuxury from "./components/AboutLiveInLuxury";
+import Testimonials from "./components/Testimonial";
 
 export default function Home() {
   return (
     <div>
-      <Hero/>
-      <AboutLiveInLuxury/>
-      <DiscoverYourDreamHome/>
-      <ExploreNow/>
-      <AboutUs/>
-      <PartnerMarquee/>
-      <Footer/>
+      <Hero />
+      <AboutLiveInLuxury />
+      <DiscoverYourDreamHome />
+      <ExploreNow />
+      <AboutUs />
+      <Testimonials />
+      <PartnerMarquee />
+      <Footer />
     </div>
   );
 }
