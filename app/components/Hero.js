@@ -5,13 +5,19 @@ import Dropdown from "./Dropdown";
 export default function Hero() {
     return (
         <div className="relative min-h-screen w-full">
-            {/* Background Image with Gradients */}
-            <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{
-                    backgroundImage: "url('/assets/hero-bg-image.jpg')"
-                }}
-            />
+            {/* Background Video */}
+            <div className="absolute inset-0 overflow-hidden">
+                <video
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                >
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            {/* Gradients */}
             <div
                 className="absolute inset-0"
                 style={{
@@ -23,10 +29,10 @@ export default function Hero() {
                 <Navbar />
 
                 {/* Search Form */}
-                <div className="md:mt-auto absolute bottom-10 md:bottom-[83px] w-full px-6">
+                <div className="md:mt-auto absolute bottom-20 sm:bottom-20 w-full px-6">
                     <div className="max-w-[1108px] bg-[#FFFFFF33] w-full mx-auto px-3.5 py-5 md:p-6 rounded-2xl" style={{ backdropFilter: "blur(9px)" }}>
-                        <div className="flex items-center flex-col lg:flex-row gap-8 md:gap-10 ">
-                            <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10'>
+                        <div className="flex items-center flex-col lg:flex-row gap-8 md:gap-10">
+                            <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
                                 <Dropdown
                                     options={["Mumbai", "Delhi", "Bangalore"]}
                                     placeholder="Select location"
@@ -55,6 +61,5 @@ export default function Hero() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
-

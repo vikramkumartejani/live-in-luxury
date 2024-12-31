@@ -50,7 +50,7 @@ export default function Testimonials() {
     <section className="relative bg-[#E5C49B] py-[96px] overflow-hidden">
       <div className="">
         <div className="text-center mb-[56px] px-4">
-          <h2 className="text-white lg:text-[32px] md:text-[26px] text-[20px] font-[400] mb-[16px]">
+          <h2 className="text-white lg:text-[32px] md:text-[26px] text-[20px] font-[600] mb-[16px]">
             What Our Customers Say
           </h2>
           <p className="text-white max-w-[742px] lg:text-[18px] md:text-[16px] text-[14px] font-[700] mx-auto">

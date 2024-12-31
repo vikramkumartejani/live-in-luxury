@@ -4,9 +4,9 @@ import ImageSlider from "./ImageSlider";
 const AboutLiveInLuxury = () => {
   return (
     <>
-      <div className="py-14 md:py-20 w-full text-center !overflow-hidden px-4">
+      <div className="pt-14 pb-6 md:py-20 w-full text-center !overflow-hidden px-4">
         <div className="h-[3px] bg-[#E1BC8A] w-[40px] mx-auto rounded-3xl"></div>
-        <h2 className="text-[#1E2A38] text-[25px] md:text-[32px] leading-[40px] font-normal mt-6">
+        <h2 className="text-[#1E2A38] text-[25px] md:text-[32px] leading-[40px] font-semibold mt-6">
           About LiveInLuxury
         </h2>
         <p className="text-[#777777] text-base md:text-[18px] leading-[27px] font-normal mt-6 max-w-[800px] mx-auto">
@@ -18,7 +18,7 @@ const AboutLiveInLuxury = () => {
         </p>
 
         {/* Boxes */}
-        <div className="mt-8 md:mt-10 max-w-[848px] mx-auto w-full grid grid-cols-2 md:flex items-start justify-between gap-4">
+        <div className="mt-8 md:mt-10 max-w-[848px] mx-auto w-full grid grid-cols-2 pl-5 md:pl-0 md:flex items-start justify-between gap-4">
           <div className="flex flex-col items-start md:gap-1">
             <h1 className="text-[#1E2A38] text-[35px] md:text-[48px] leading-[60px] font-normal">
               31<span className="text-[#E1BC8A]">+</span>

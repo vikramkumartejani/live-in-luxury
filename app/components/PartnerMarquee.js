@@ -22,7 +22,7 @@ export default function PartnerMarquee() {
 
   return (
     <div className="text-center py-10 md:py-24">
-      <h2 className="text-[25px] md:text-[32px] font-normal leading-[40px] mb-3 md:mb-6 text-[#1E2A38] px-4">We&apos;ve Partnered With</h2>
+      <h2 className="text-[25px] md:text-[32px] font-semibold leading-[40px] mb-3 md:mb-6 text-[#1E2A38] px-4">We&apos;ve Partnered With</h2>
       <p className="text-base md:text-lg leading-[27px] font-normal text-[#777777] mb-8 md:mb-14 px-4">
         Reliable partners with excellent portfolio to reach new heights together!
       </p>
