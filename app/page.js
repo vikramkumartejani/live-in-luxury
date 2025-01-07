@@ -7,6 +7,7 @@ import ExploreNow from "./components/ExploreNow";
 import DiscoverYourDreamHome from "./components/DiscoverYourDreamHome";
 import AboutLiveInLuxury from "./components/AboutLiveInLuxury";
 import Testimonials from "./components/Testimonial";
+import ImagesVideos from "./components/ImagesVideos";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <AboutLiveInLuxury />
       <DiscoverYourDreamHome />
       <ExploreNow />
+      <ImagesVideos/>
       <AboutUs />
       <Testimonials />
       <PartnerMarquee />

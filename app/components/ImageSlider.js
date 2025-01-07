@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, EffectCoverflow } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/effect-coverflow";
 import "swiper/css/autoplay";
 
 const videos = [
@@ -14,102 +15,98 @@ const videos = [
   "/assets/video.mp4",
   "/assets/video.mp4",
   "/assets/video.mp4",
-  "/assets/video.mp4",
 ];
 
 export default function VideoSlider() {
-  const [hoveringIndex, setHoveringIndex] = useState(null); // Store the index of the hovered video
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isAutoplayRunning, setIsAutoplayRunning] = useState(true);
   const swiperRef = useRef(null);
   const videoRefs = useRef([]);
 
-  // Handle play/pause logic for videos
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        swiperRef.current?.autoplay.stop();
+      } else {
+        swiperRef.current?.autoplay.start();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  const handleSlideChange = (swiper) => {
+    setActiveIndex(swiper.realIndex);
+    videoRefs.current.forEach((video, index) => {
+      if (index === swiper.realIndex) {
+        video.currentTime = 0;
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+  };
+
   const handleVideoInteraction = (action, index) => {
     if (swiperRef.current) {
       if (action === "play") {
         swiperRef.current.autoplay.stop();
-        videoRefs.current[index].play();
-      } else {
-        videoRefs.current[index].pause();
-        if (hoveringIndex === null) {
-          swiperRef.current.autoplay.start();
-        }
+        setIsAutoplayRunning(false);
+      } else if (action === "pause" && isAutoplayRunning) {
+        swiperRef.current.autoplay.start();
       }
     }
   };
 
-  // Handle mouse hover events for stopping autoplay
-  const handleMouseEnter = (index) => {
-    setHoveringIndex(index); // Set the hovering index to the current video
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.stop();
+  const handleVideoEnded = (index) => {
+    if (swiperRef.current && index === activeIndex) {
+      swiperRef.current.slideNext();
     }
   };
 
-  const handleMouseLeave = () => {
-    setHoveringIndex(null); // Reset the hovering index
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.start();
-    }
-  };
-
-  // Handle video download functionality
-  const handleDownload = (videoSrc) => {
-    const link = document.createElement("a");
-    link.href = videoSrc;
-    link.download = "video.mp4";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  // Handle video error events
   const handleVideoError = (index) => {
     console.error(`Error loading video at index ${index}`);
-    videoRefs.current[index]?.pause();
+    if (swiperRef.current && index === activeIndex) {
+      swiperRef.current.slideNext();
+    }
   };
 
   return (
     <div className="w-full mt-10">
       <Swiper
-        spaceBetween={24}
+        effect="coverflow"
+        grabCursor={true}
         centeredSlides={true}
-        slidesPerView={"auto"}
+        slidesPerView="auto"
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
         loop={true}
-        initialSlide={1}
-        speed={2000}
+        speed={1000}
         autoplay={{
-          delay: 3000,
+          delay: 5000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
-        breakpoints={{
-          320: {
-            spaceBetween: 20,
-          },
-          768: {
-            spaceBetween: 30,
-          },
-          1024: {
-            spaceBetween: 40,
-          },
-          1280: {
-            spaceBetween: 50,
-          },
-          2000: {
-            spaceBetween: 80,
-          },
-        }}
-        modules={[Autoplay]}
+        modules={[Autoplay, EffectCoverflow]}
         className="w-full"
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
+        onSlideChange={handleSlideChange}
       >
         {videos.map((videoSrc, index) => (
           <SwiperSlide
             key={index}
             className="xl:!w-[1005px] lg:!w-[800px] md:!w-[600px] sm:!w-[450px] !w-[295px] max-w-full"
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
           >
             <div className="w-full md:h-[626px] h-[384px] rounded-[16px] overflow-hidden relative">
               <video
@@ -121,15 +118,14 @@ export default function VideoSlider() {
                 className="rounded-[16px] min-h-full object-cover bg-gray-200"
                 onPlay={() => handleVideoInteraction("play", index)}
                 onPause={() => handleVideoInteraction("pause", index)}
+                onEnded={() => handleVideoEnded(index)}
                 playsInline
                 muted
-                autoPlay={true}
-                preload="auto"  // Preload the video data (metadata + part of the video)
+                loop={false}
+                preload="metadata"
                 onError={() => handleVideoError(index)}
-                controls={hoveringIndex === index}
+                controls={activeIndex === index}
               ></video>
-
-
             </div>
           </SwiperSlide>
         ))}
@@ -137,3 +133,4 @@ export default function VideoSlider() {
     </div>
   );
 }
+
